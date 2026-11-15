@@ -1,5 +1,6 @@
 <script setup>
 import heroImg from '../assets/frame-1.png'
+import masterClassLogo from '../assets/master-class-logo.png'
 </script>
 
 <template>
@@ -14,7 +15,7 @@ import heroImg from '../assets/frame-1.png'
       </div>
 
       <div class="hero-card">
-        <p class="type-label hero-eyebrow">Master Class</p>
+        <img :src="masterClassLogo" alt="Master Class" class="hero-logo" />
         <h1 class="type-display hero-title">Master Class courses for speech pathologists</h1>
         <p class="type-body hero-copy">
           In-depth courses from leading experts, grouped by the kind of work you do. Learn skills
@@ -67,9 +68,10 @@ import heroImg from '../assets/frame-1.png'
   padding: 28px var(--gutter) 0;
 }
 
-.hero-eyebrow {
-  color: var(--color-text-secondary);
-  margin-bottom: 10px;
+.hero-logo {
+  height: 36px;
+  width: auto;
+  margin-bottom: 14px;
 }
 
 .hero-title {

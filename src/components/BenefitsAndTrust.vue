@@ -1,4 +1,5 @@
 <script setup>
+import masterClassLogo from '../assets/master-class-logo.png'
 import { benefits } from '../data/masterClasses'
 </script>
 
@@ -13,22 +14,8 @@ import { benefits } from '../data/masterClasses'
       </div>
 
       <div class="trust-row">
-        <div class="master-class-badge" aria-label="Master Class">
-          <svg
-            width="36"
-            height="36"
-            viewBox="0 0 36 36"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            aria-hidden="true"
-          >
-            <path d="M4 13L18 6L24 18L10 25L4 13Z" fill="#E13121" />
-            <path d="M13 18L27 11L32 22L18 29L13 18Z" fill="#F93822" fill-opacity="0.85" />
-          </svg>
-          <div class="badge-wordmark">
-            <span>master</span>
-            <span>class</span>
-          </div>
+        <div class="master-class-badge">
+          <img :src="masterClassLogo" alt="Master Class" class="badge-logo-img" />
         </div>
 
         <div class="trustpilot-box">
@@ -102,17 +89,13 @@ import { benefits } from '../data/masterClasses'
 .master-class-badge {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
   flex-shrink: 0;
 }
 
-.badge-wordmark {
-  display: flex;
-  flex-direction: column;
-  font-size: 20px;
-  line-height: 20px;
-  font-weight: 500;
-  color: var(--color-text-secondary);
+.badge-logo-img {
+  height: 44px;
+  width: auto;
+  display: block;
 }
 
 .trustpilot-box {
