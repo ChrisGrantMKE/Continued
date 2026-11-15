@@ -1,5 +1,20 @@
-# Vue 3 + Vite
+# SpeechPathology.com — Master Class Redesign
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+A responsive, static single-page Vue 3 + Vite application redesigning the SpeechPathology.com Master Class landing page with 5 focus-area panels, 16 course accordions, and WCAG 2.2 AA accessibility.
 
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+**Live site:** https://chrisgrantmke.github.io/Continued/
+
+## Development
+
+```bash
+npm install
+npm run dev
+```
+
+## Build & Deploy
+
+```bash
+npm run build
+```
+
+Pushes to `main` automatically build and deploy `./dist` to GitHub Pages via [deploy.yml](.github/workflows/deploy.yml).
