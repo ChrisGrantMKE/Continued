@@ -81,28 +81,32 @@ function toggleCourse(courseIdx) {
               </span>
             </button>
 
-            <Transition name="course-expand">
-              <div
-                v-if="activeCourseIndex === courseIdx"
-                :id="`course-body-${area.id}-${courseIdx}`"
-                class="course-body"
-              >
-                <ul class="course-bullets">
-                  <li v-for="bullet in course.bullets" :key="bullet" class="type-body">
-                    {{ bullet }}
-                  </li>
-                </ul>
-                <p class="type-label course-meta">{{ course.meta }}</p>
-                <a
-                  :href="course.url"
-                  target="_blank"
-                  rel="noopener"
-                  class="btn btn-secondary course-cta"
-                >
-                  View course <span aria-hidden="true">→</span>
-                </a>
+            <div
+              :id="`course-body-${area.id}-${courseIdx}`"
+              class="course-collapse"
+              :class="{ 'is-expanded': activeCourseIndex === courseIdx }"
+              :aria-hidden="activeCourseIndex !== courseIdx"
+            >
+              <div class="course-collapse-inner">
+                <div class="course-body">
+                  <ul class="course-bullets">
+                    <li v-for="bullet in course.bullets" :key="bullet" class="type-body">
+                      {{ bullet }}
+                    </li>
+                  </ul>
+                  <p class="type-label course-meta">{{ course.meta }}</p>
+                  <a
+                    :href="course.url"
+                    target="_blank"
+                    rel="noopener"
+                    class="btn btn-secondary course-cta"
+                    :tabindex="activeCourseIndex === courseIdx ? 0 : -1"
+                  >
+                    View course <span aria-hidden="true">→</span>
+                  </a>
+                </div>
               </div>
-            </Transition>
+            </div>
           </div>
         </div>
       </Transition>
@@ -188,18 +192,24 @@ function toggleCourse(courseIdx) {
   transform: translateY(-6px);
 }
 
-/* Smooth ease-in-out for individual course accordion details */
-.course-expand-enter-active,
-.course-expand-leave-active {
+/* Smooth ease-in-out height + opacity for individual course accordion details */
+.course-collapse {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
   transition:
-    opacity 0.24s cubic-bezier(0.4, 0, 0.2, 1),
-    transform 0.24s cubic-bezier(0.4, 0, 0.2, 1);
+    grid-template-rows 0.32s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.26s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.course-expand-enter-from,
-.course-expand-leave-to {
-  opacity: 0;
-  transform: translateY(-4px);
+.course-collapse.is-expanded {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.course-collapse-inner {
+  overflow: hidden;
+  min-height: 0;
 }
 
 .panel-detail {
