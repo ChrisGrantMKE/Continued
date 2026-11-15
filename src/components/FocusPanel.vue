@@ -37,10 +37,8 @@ function toggleCourse(courseIdx) {
   <article class="focus-panel" :class="{ 'is-open': isOpen }">
     <div class="panel-summary">
       <div class="summary-top">
-        <p class="type-label panel-eyebrow">
-          Focus area {{ index + 1 }} of {{ total }} · {{ area.courses.length }} courses
-        </p>
-        <h3 class="type-title panel-title">{{ area.title }}</h3>
+        <h3 class="panel-title">{{ area.title }}</h3>
+        <p class="type-label panel-count">{{ area.courses.length }} courses</p>
         <p class="type-body panel-description">{{ area.description }}</p>
       </div>
 
@@ -58,52 +56,56 @@ function toggleCourse(courseIdx) {
     </div>
 
     <div :id="`panel-content-${area.id}`" class="panel-detail">
-      <div v-if="!isOpen" class="panel-media">
-        <img :src="area.image" :alt="area.imageAlt" class="panel-image" />
-      </div>
+      <Transition name="panel-swap" mode="out-in">
+        <div v-if="!isOpen" key="media" class="panel-media">
+          <img :src="area.image" :alt="area.imageAlt" class="panel-image" />
+        </div>
 
-      <div v-else class="course-list" role="region" :aria-label="`${area.title} courses`">
-        <div
-          v-for="(course, courseIdx) in area.courses"
-          :key="course.title"
-          class="course-row"
-          :class="{ 'is-expanded': activeCourseIndex === courseIdx }"
-        >
-          <button
-            type="button"
-            class="course-trigger"
-            :aria-expanded="activeCourseIndex === courseIdx"
-            :aria-controls="`course-body-${area.id}-${courseIdx}`"
-            @click="toggleCourse(courseIdx)"
-          >
-            <span class="type-title course-name">{{ course.title }}</span>
-            <span class="course-icon" aria-hidden="true">
-              {{ activeCourseIndex === courseIdx ? '–' : '+' }}
-            </span>
-          </button>
-
+        <div v-else key="courses" class="course-list" role="region" :aria-label="`${area.title} courses`">
           <div
-            v-if="activeCourseIndex === courseIdx"
-            :id="`course-body-${area.id}-${courseIdx}`"
-            class="course-body"
+            v-for="(course, courseIdx) in area.courses"
+            :key="course.title"
+            class="course-row"
+            :class="{ 'is-expanded': activeCourseIndex === courseIdx }"
           >
-            <ul class="course-bullets">
-              <li v-for="bullet in course.bullets" :key="bullet" class="type-body">
-                {{ bullet }}
-              </li>
-            </ul>
-            <p class="type-label course-meta">{{ course.meta }}</p>
-            <a
-              :href="course.url"
-              target="_blank"
-              rel="noopener"
-              class="btn btn-secondary course-cta"
+            <button
+              type="button"
+              class="course-trigger"
+              :aria-expanded="activeCourseIndex === courseIdx"
+              :aria-controls="`course-body-${area.id}-${courseIdx}`"
+              @click="toggleCourse(courseIdx)"
             >
-              View course <span aria-hidden="true">→</span>
-            </a>
+              <span class="type-title course-name">{{ course.title }}</span>
+              <span class="course-icon" aria-hidden="true">
+                {{ activeCourseIndex === courseIdx ? '–' : '+' }}
+              </span>
+            </button>
+
+            <Transition name="course-expand">
+              <div
+                v-if="activeCourseIndex === courseIdx"
+                :id="`course-body-${area.id}-${courseIdx}`"
+                class="course-body"
+              >
+                <ul class="course-bullets">
+                  <li v-for="bullet in course.bullets" :key="bullet" class="type-body">
+                    {{ bullet }}
+                  </li>
+                </ul>
+                <p class="type-label course-meta">{{ course.meta }}</p>
+                <a
+                  :href="course.url"
+                  target="_blank"
+                  rel="noopener"
+                  class="btn btn-secondary course-cta"
+                >
+                  View course <span aria-hidden="true">→</span>
+                </a>
+              </div>
+            </Transition>
           </div>
         </div>
-      </div>
+      </Transition>
     </div>
   </article>
 </template>
@@ -124,7 +126,9 @@ function toggleCourse(courseIdx) {
   flex-direction: column;
   justify-content: space-between;
   gap: 24px;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition:
+    background-color 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .focus-panel.is-open .panel-summary {
@@ -132,21 +136,26 @@ function toggleCourse(courseIdx) {
   color: var(--color-white);
 }
 
-.panel-eyebrow {
-  color: var(--color-text-secondary);
-  margin-bottom: 10px;
-}
-
-.focus-panel.is-open .panel-eyebrow {
-  color: rgba(255, 255, 255, 0.8);
-}
-
 .panel-title {
-  margin-bottom: 10px;
+  font-size: 24px;
+  line-height: 30px;
+  font-weight: 500;
+  margin: 0 0 6px;
+}
+
+.panel-count {
+  color: var(--color-text-secondary);
+  margin-bottom: 12px;
+  transition: color 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.focus-panel.is-open .panel-count {
+  color: rgba(255, 255, 255, 0.78);
 }
 
 .panel-description {
   color: var(--color-text-secondary);
+  transition: color 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .focus-panel.is-open .panel-description {
@@ -155,6 +164,42 @@ function toggleCourse(courseIdx) {
 
 .panel-toggle-btn {
   width: 100%;
+  transition:
+    background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Smooth ease-in-out swap between photo and course list */
+.panel-swap-enter-active,
+.panel-swap-leave-active {
+  transition:
+    opacity 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.panel-swap-enter-from {
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+.panel-swap-leave-to {
+  opacity: 0;
+  transform: translateY(-6px);
+}
+
+/* Smooth ease-in-out for individual course accordion details */
+.course-expand-enter-active,
+.course-expand-leave-active {
+  transition:
+    opacity 0.24s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.24s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.course-expand-enter-from,
+.course-expand-leave-to {
+  opacity: 0;
+  transform: translateY(-4px);
 }
 
 .panel-detail {
@@ -256,6 +301,11 @@ function toggleCourse(courseIdx) {
     flex-shrink: 0;
     padding: 36px;
     border-right: 1px solid var(--color-border-dark);
+  }
+
+  .panel-title {
+    font-size: 26px;
+    line-height: 32px;
   }
 
   .panel-toggle-btn {

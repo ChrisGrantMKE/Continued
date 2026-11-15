@@ -99,7 +99,7 @@ export const focusAreas = [
   },
   {
     id: 'aac',
-    title: 'AAC',
+    title: 'Augmentative and Alternative Communication (AAC)',
     description:
       'For clinicians supporting people who use augmentative and alternative communication, at any age.',
     image: frame4,
