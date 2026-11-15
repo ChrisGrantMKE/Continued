@@ -1,8 +1,15 @@
 <script setup>
-import { ref } from 'vue'
+import { nextTick, ref } from 'vue'
 import spLogo from '../assets/sp-logo.svg'
 
 const mobileMenuOpen = ref(false)
+const menuBtnRef = ref(null)
+
+async function closeMobileMenu() {
+  mobileMenuOpen.value = false
+  await nextTick()
+  menuBtnRef.value?.focus()
+}
 
 const navLinks = [
   { label: 'Continuing Education', href: 'https://www.speechpathology.com' },
@@ -24,7 +31,7 @@ const navLinks = [
           rel="noopener"
           class="announcement-link"
         >
-          Join now
+          Join now<span class="sr-only"> (opens in a new tab)</span>
         </a>
       </div>
     </div>
@@ -65,6 +72,7 @@ const navLinks = [
         </nav>
 
         <button
+          ref="menuBtnRef"
           type="button"
           class="btn btn-secondary mobile-menu-btn"
           :aria-expanded="mobileMenuOpen"
@@ -80,6 +88,7 @@ const navLinks = [
         id="mobile-nav-drawer"
         class="mobile-nav"
         aria-label="Mobile navigation"
+        @keydown.escape="closeMobileMenu"
       >
         <div class="container mobile-nav-inner">
           <a
@@ -134,6 +143,11 @@ const navLinks = [
 .announcement-link {
   text-decoration: underline;
   font-weight: 500;
+}
+
+.announcement-link:focus-visible {
+  outline: 2px solid var(--color-white);
+  outline-offset: 2px;
 }
 
 .nav-wrapper {

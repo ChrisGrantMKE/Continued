@@ -24,7 +24,7 @@ import { footerColumns, legalLinks } from '../data/masterClasses'
             rel="noopener"
             class="btn btn-secondary newsletter-cta"
           >
-            Subscribe <span aria-hidden="true">→</span>
+            Subscribe <span aria-hidden="true">→</span><span class="sr-only"> (opens in a new tab)</span>
           </a>
         </div>
 

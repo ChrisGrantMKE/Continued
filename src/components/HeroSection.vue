@@ -28,7 +28,7 @@ import masterClassLogo from '../assets/master-class-logo.png'
             rel="noopener"
             class="btn btn-primary"
           >
-            Join now <span aria-hidden="true">→</span>
+            Join now <span aria-hidden="true">→</span><span class="sr-only"> (opens in a new tab)</span>
           </a>
           <a href="#focus-areas" class="btn btn-secondary">
             Browse focus areas <span aria-hidden="true">↓</span>

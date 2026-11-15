@@ -10,9 +10,10 @@ import { focusAreas } from './data/masterClasses'
 
 <template>
   <div class="page-shell">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <SiteHeader />
 
-    <main>
+    <main id="main-content" tabindex="-1">
       <HeroSection />
 
       <section id="focus-areas" class="focus-areas-section">

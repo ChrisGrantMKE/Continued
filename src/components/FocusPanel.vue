@@ -100,6 +100,7 @@ function toggleCourse(courseIdx) {
                     target="_blank"
                     rel="noopener"
                     class="btn btn-secondary course-cta"
+                    :aria-label="`View course: ${course.title} (opens in a new tab)`"
                     :tabindex="activeCourseIndex === courseIdx ? 0 : -1"
                   >
                     View course <span aria-hidden="true">→</span>
@@ -154,7 +155,7 @@ function toggleCourse(courseIdx) {
 }
 
 .focus-panel.is-open .panel-count {
-  color: rgba(255, 255, 255, 0.78);
+  color: #e0e2e5;
 }
 
 .panel-description {
@@ -163,7 +164,7 @@ function toggleCourse(courseIdx) {
 }
 
 .focus-panel.is-open .panel-description {
-  color: rgba(255, 255, 255, 0.88);
+  color: #f2f3f4;
 }
 
 .panel-toggle-btn {
@@ -172,6 +173,11 @@ function toggleCourse(courseIdx) {
     background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
     color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
     border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.focus-panel.is-open .btn-on-dark:focus-visible {
+  outline: 2px solid var(--color-white);
+  outline-offset: 2px;
 }
 
 /* Smooth ease-in-out swap between photo and course list */
@@ -197,14 +203,21 @@ function toggleCourse(courseIdx) {
   display: grid;
   grid-template-rows: 0fr;
   opacity: 0;
+  visibility: hidden;
   transition:
     grid-template-rows 0.32s cubic-bezier(0.4, 0, 0.2, 1),
-    opacity 0.26s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity 0.26s cubic-bezier(0.4, 0, 0.2, 1),
+    visibility 0s linear 0.32s;
 }
 
 .course-collapse.is-expanded {
   grid-template-rows: 1fr;
   opacity: 1;
+  visibility: visible;
+  transition:
+    grid-template-rows 0.32s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.26s cubic-bezier(0.4, 0, 0.2, 1),
+    visibility 0s linear 0s;
 }
 
 .course-collapse-inner {

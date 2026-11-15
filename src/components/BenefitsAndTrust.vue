@@ -4,8 +4,9 @@ import { benefits } from '../data/masterClasses'
 </script>
 
 <template>
-  <section class="benefits-section">
+  <section class="benefits-section" aria-labelledby="benefits-heading">
     <div class="container">
+      <h2 id="benefits-heading" class="sr-only">Membership benefits and reviews</h2>
       <div class="benefits-grid">
         <div v-for="item in benefits" :key="item.title" class="benefit-item">
           <h3 class="type-title benefit-title">{{ item.title }}</h3>

@@ -25,7 +25,7 @@ import membershipImg from '../assets/frame-7.png'
           rel="noopener"
           class="btn btn-primary membership-cta"
         >
-          Join now <span aria-hidden="true">→</span>
+          Join now <span aria-hidden="true">→</span><span class="sr-only"> (opens in a new tab)</span>
         </a>
       </div>
     </div>
