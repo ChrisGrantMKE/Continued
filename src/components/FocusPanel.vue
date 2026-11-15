@@ -89,12 +89,12 @@ function toggleCourse(courseIdx) {
             >
               <div class="course-collapse-inner">
                 <div class="course-body">
+                  <p class="type-label course-meta">{{ course.meta }}</p>
                   <ul class="course-bullets">
                     <li v-for="bullet in course.bullets" :key="bullet" class="type-body">
                       {{ bullet }}
                     </li>
                   </ul>
-                  <p class="type-label course-meta">{{ course.meta }}</p>
                   <a
                     :href="course.url"
                     target="_blank"
@@ -279,19 +279,19 @@ function toggleCourse(courseIdx) {
   padding: 0 24px 24px;
 }
 
+.course-meta {
+  color: var(--color-text-muted);
+  margin-bottom: 12px;
+}
+
 .course-bullets {
-  margin: 0 0 14px;
+  margin: 0 0 18px;
   padding-left: 20px;
   color: var(--color-text-secondary);
 }
 
 .course-bullets li + li {
   margin-top: 4px;
-}
-
-.course-meta {
-  color: var(--color-text-muted);
-  margin-bottom: 16px;
 }
 
 .course-cta {
