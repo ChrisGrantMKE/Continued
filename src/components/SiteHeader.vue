@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue'
+import spLogo from '../assets/sp-logo.svg'
 
 const mobileMenuOpen = ref(false)
 
@@ -31,11 +32,7 @@ const navLinks = [
     <div class="nav-wrapper">
       <div class="container nav-inner">
         <a href="#" class="brand-logo" aria-label="SpeechPathology.com, a Continued family site">
-          <span class="brand-mark" aria-hidden="true"></span>
-          <span class="brand-text">
-            <span class="brand-name">SPEECHPATHOLOGY.COM</span>
-            <span class="brand-sub">a Continu<strong>ed</strong> family site</span>
-          </span>
+          <img :src="spLogo" alt="SpeechPathology.com, a Continued family site" class="brand-logo-img" />
         </a>
 
         <nav class="desktop-nav" aria-label="Primary navigation">
@@ -155,34 +152,13 @@ const navLinks = [
 .brand-logo {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
   flex-shrink: 0;
 }
 
-.brand-mark {
-  width: 28px;
-  height: 28px;
-  background-color: var(--color-red);
-  display: inline-block;
-  flex-shrink: 0;
-}
-
-.brand-text {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.15;
-}
-
-.brand-name {
-  font-size: 14px;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  color: var(--color-charcoal);
-}
-
-.brand-sub {
-  font-size: 11px;
-  color: var(--color-text-secondary);
+.brand-logo-img {
+  height: 34px;
+  width: auto;
+  display: block;
 }
 
 .desktop-nav {

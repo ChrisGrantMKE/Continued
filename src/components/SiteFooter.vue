@@ -1,10 +1,17 @@
 <script setup>
+import continuedLogo from '../assets/continued-logo.svg'
 import { footerColumns, legalLinks } from '../data/masterClasses'
 </script>
 
 <template>
   <footer class="site-footer">
     <div class="container">
+      <div class="footer-brand">
+        <a href="https://www.continued.com" target="_blank" rel="noopener" aria-label="Continued">
+          <img :src="continuedLogo" alt="Continued" class="footer-logo-img" />
+        </a>
+      </div>
+
       <div class="footer-top">
         <div class="footer-newsletter">
           <h2 class="type-title newsletter-title">Courses and CE news, by email.</h2>
@@ -64,6 +71,16 @@ import { footerColumns, legalLinks } from '../data/masterClasses'
   background-color: var(--color-surface-footer);
   color: var(--color-charcoal);
   padding-block: 48px 32px;
+}
+
+.footer-brand {
+  margin-bottom: 28px;
+}
+
+.footer-logo-img {
+  height: 30px;
+  width: auto;
+  display: block;
 }
 
 .footer-top {
